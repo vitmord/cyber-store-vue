@@ -4,7 +4,7 @@ import Service from './Service.vue'
 import Details from './Details.vue'
 import Reviews from './Reviews.vue'
 import Related from './Related.vue'
-import { inject } from 'vue'
+import { inject, provide } from 'vue'
 
 const props = defineProps({
   product: Object
@@ -12,6 +12,8 @@ const props = defineProps({
 
 const addToFavorite = inject('addToFavorite')
 const onClickProductBtn = inject('onClickProductBtn')
+
+provide('product', props.product)
 </script>
 
 <template>

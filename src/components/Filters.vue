@@ -57,7 +57,7 @@ onMounted(() => {
               <input
                 class="visually-hidden control__input"
                 type="checkbox"
-                :checked="filters.category.includes(category)"
+                :checked="Array.isArray(filters.category) && filters.category.includes(category)"
                 @change="() => onCategoryChange(category)"
               />
               <span class="control__mark"></span>

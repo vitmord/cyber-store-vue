@@ -14,41 +14,19 @@
       </p>
 
       <ul class="details__list">
-        <li class="details__item">
-          <span class="details__name">Screen diagonal</span><span class="details__value">6.7"</span>
-        </li>
-        <li class="details__item">
-          <span class="details__name">The screen resolution</span
-          ><span class="details__value">2796x1290</span>
-        </li>
-        <li class="details__item">
-          <span class="details__name">The screen refresh rate</span
-          ><span class="details__value">120 Hz</span>
-        </li>
-        <li class="details__item">
-          <span class="details__name">The pixel density</span
-          ><span class="details__value">460 ppi</span>
-        </li>
-        <li class="details__item">
-          <span class="details__name">Screen type</span><span class="details__value">OLED</span>
-        </li>
-        <li class="details__item">
-          <span class="details__name">Additionally</span
-          ><span class="details__value"
-            >Dynamic Island<br />
-            Always-On display <br />
-            HDR display <br />
-            True Tone <br />
-            Wide color (P3)</span
-          >
-        </li>
-        <li class="details__item">
-          <span class="details__name">CPU</span><span class="details__value">A16 Bionic</span>
+        <li class="details__item" v-for="(char, idx) in product?.characteristics || []" :key="char.characteristic + idx">
+          <span class="details__name">{{ char.characteristic }}</span>
+          <span class="details__value">{{ char.value }}</span>
         </li>
       </ul>
     </div>
   </section>
 </template>
+
+<script setup>
+import { inject } from 'vue'
+const product = inject('product')
+</script>
 
 <style lang="scss" scoped>
 .details {
