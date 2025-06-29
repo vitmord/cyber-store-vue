@@ -19,34 +19,22 @@
 
       <ul class="categories__list">
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--phones"
-            >Phones</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Смартфоны' } }" class="categories__link categories__link--phones">Phones</RouterLink>
         </li>
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--smart-watches"
-            >Smart Watches</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Часы' } }" class="categories__link categories__link--smart-watches">Smart Watches</RouterLink>
         </li>
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--cameras"
-            >Cameras</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Аксессуары' } }" class="categories__link categories__link--cameras">Accessories</RouterLink>
         </li>
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--headphones"
-            >Headphones</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Гаджеты' } }" class="categories__link categories__link--headphones">Headphones</RouterLink>
         </li>
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--computers"
-            >Computers</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Компьютеры' } }" class="categories__link categories__link--computers">Computers</RouterLink>
         </li>
         <li class="categories__item">
-          <RouterLink to="/catalog" class="categories__link categories__link--gaming"
-            >Gaming</RouterLink
-          >
+          <RouterLink :to="{ path: '/catalog', query: { category: 'Планшеты' } }" class="categories__link categories__link--gaming">Tablets</RouterLink>
         </li>
       </ul>
     </div>

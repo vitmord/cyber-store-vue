@@ -1,161 +1,76 @@
+<script setup>
+import { inject, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
+const items = inject('items')
+const filters = inject('filters')
+const route = useRoute()
+
+// Получаем уникальные категории из items
+const categories = computed(() => {
+  const set = new Set()
+  items.value.forEach(item => {
+    if (item.category) set.add(item.category)
+  })
+  return Array.from(set)
+})
+
+// Множественный выбор категорий
+const onCategoryChange = (category) => {
+  if (!Array.isArray(filters.category)) filters.category = []
+  if (filters.category.includes(category)) {
+    filters.category = filters.category.filter(c => c !== category)
+  } else {
+    filters.category = [...filters.category, category]
+  }
+}
+
+onMounted(() => {
+  if (route.query.category) {
+    // поддержка множественного выбора через запятую
+    if (Array.isArray(route.query.category)) {
+      filters.category = route.query.category
+    } else {
+      filters.category = String(route.query.category).split(',')
+    }
+  } else {
+    filters.category = []
+  }
+})
+</script>
+
 <template>
   <section class="catalog__filters filters">
     <h2 class="visually-hidden">Filters</h2>
     <form class="filters__form" action="#" method="get">
+
       <fieldset class="filters__group">
         <div class="filters__group-header">
-          <legend class="filters__subtitle">Brand</legend>
+          <legend class="filters__subtitle">Категория</legend>
           <button class="filters__group-btn filters__group-btn--expanded" type="button">
             <span class="visually-hidden">Expand / Collapse</span>
           </button>
         </div>
         <ul class="filters__list">
-          <li class="filters__item">
-            <input class="filters__input" type="text" placeholder="Search" />
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input
+          <li class="filters__item" v-for="category in categories" :key="category">
+            <label class="control">
+              <input
                 class="visually-hidden control__input"
                 type="checkbox"
-                name="apple"
-                checked
-              /><span class="control__mark"></span
-              ><span class="control__label"
-                >Apple <span class="control__label-qty">110</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="samsung" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Samsung<span class="control__label-qty">125</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="xiaomi" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Xiaomi<span class="control__label-qty">68</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="poco" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Poco<span class="control__label-qty">44</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="oppo" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >OPPO<span class="control__label-qty">36</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="honor" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Honor<span class="control__label-qty">10</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="motorola" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Motorola<span class="control__label-qty">34</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="nokia" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Nokia<span class="control__label-qty">22</span></span
-              ></label
-            >
-          </li>
-          <li class="filters__item">
-            <label class="control"
-              ><input class="visually-hidden control__input" type="checkbox" name="realme" /><span
-                class="control__mark"
-              ></span
-              ><span class="control__label"
-                >Realme<span class="control__label-qty">35</span></span
-              ></label
-            >
+                :checked="filters.category.includes(category)"
+                @change="() => onCategoryChange(category)"
+              />
+              <span class="control__mark"></span>
+              <span class="control__label">{{ category }}</span>
+            </label>
           </li>
         </ul>
-      </fieldset>
-      <fieldset class="filters__group">
-        <div class="filters__group-header">
-          <legend class="filters__subtitle">Battery capacity</legend>
-          <button class="filters__group-btn filters__group-btn--collapsed" type="button">
-            <span class="visually-hidden">Expand / Collapse</span>
-          </button>
-        </div>
-      </fieldset>
-
-      <fieldset class="filters__group">
-        <div class="filters__group-header">
-          <legend class="filters__subtitle">Screen type</legend>
-          <button class="filters__group-btn filters__group-btn--collapsed" type="button">
-            <span class="visually-hidden">Expand / Collapse</span>
-          </button>
-        </div>
-      </fieldset>
-
-      <fieldset class="filters__group">
-        <div class="filters__group-header">
-          <legend class="filters__subtitle">Screen diagonal</legend>
-
-          <button class="filters__group-btn filters__group-btn--collapsed" type="button">
-            <span class="visually-hidden">Expand / Collapse</span>
-          </button>
-        </div>
-      </fieldset>
-
-      <fieldset class="filters__group">
-        <div class="filters__group-header">
-          <legend class="filters__subtitle">Protection class</legend>
-          <button class="filters__group-btn filters__group-btn--collapsed" type="button">
-            <span class="visually-hidden">Expand / Collapse</span>
-          </button>
-        </div>
-      </fieldset>
-
-      <fieldset class="filters__group">
-        <div class="filters__group-header">
-          <legend class="filters__subtitle">Built-in memory</legend>
-          <button class="filters__group-btn filters__group-btn--collapsed" type="button">
-            <span class="visually-hidden">Expand / Collapse</span>
-          </button>
-        </div>
       </fieldset>
     </form>
   </section>
 </template>
+
+
 
 <style lang="scss" scoped>
 .filters__group-header {
@@ -275,7 +190,7 @@
   color: var(--Main-Black, #000);
   font-family: ABeeZee;
   font-size: 15px;
-  font-style: italic;
+//   font-style: italic;
   font-weight: 400;
   line-height: 24px; /* 160% */
 }

@@ -16,6 +16,7 @@ const subTotalPrice = computed(() => {
 const filters = reactive({
   sortBy: 'count-review',
   searchQuery: '',
+  category: null,
 })
 
 // Обработчик изменения поискового запроса

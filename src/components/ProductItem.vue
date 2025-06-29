@@ -27,12 +27,12 @@ const props = defineProps({
       <span class="visually-hidden">Add to favorite</span></button
     ><img class="product-item__img" :src="imageUrl" :alt="alt" />
     <h3 class="product-item__title">
-      <a class="product-item__link" href="#">{{ brand }} {{ title }}</a>
+      <RouterLink :to="`/product/${id}`" class="product-item__link">{{ brand }} {{ title }}</RouterLink>
     </h3>
     <b class="product-item__price">${{ price }}</b
-    ><a @click="onClickAddToCart" class="product-item__btn btn" href="#">{{
+    ><button @click="onClickAddToCart" class="product-item__btn btn" type="button">{{
       isAddedToCart ? 'Remove from cart' : 'Buy now'
-    }}</a>
+    }}</button>
   </li>
 </template>
 

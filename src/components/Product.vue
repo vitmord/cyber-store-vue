@@ -4,85 +4,77 @@ import Service from './Service.vue'
 import Details from './Details.vue'
 import Reviews from './Reviews.vue'
 import Related from './Related.vue'
+import { inject } from 'vue'
+
+const props = defineProps({
+  product: Object
+})
+
+const addToFavorite = inject('addToFavorite')
+const onClickProductBtn = inject('onClickProductBtn')
 </script>
 
 <template>
   <div class="product">
     <section class="product__main container">
       <div class="product__img-box">
-        <ul class="product__img-list">
-          <li class="product__img-item product__img-item--active">
-            <img
+        <img
               class="product__img"
-              src="/images/product_apple_iphone_14_pro_max_01@2x.png"
-              alt="Apple iPhone 14 Pro Max"
+              :src="`/${product?.images?.[0]}`"
+              :alt="product?.name || 'Product Alt'"
             />
-          </li>
-          <li class="product__img-item product__img-item--current">
-            <img
-              class="product__img"
-              src="/images/product_apple_iphone_14_pro_max_02@2x.png"
-              alt="Apple iPhone 14 Pro Max"
-            />
-          </li>
-          <li class="product__img-item">
-            <img
-              class="product__img"
-              src="/images/product_apple_iphone_14_pro_max_03@2x.png"
-              alt="Apple iPhone 14 Pro Max"
-            />
-          </li>
-          <li class="product__img-item">
-            <img
-              class="product__img"
-              src="/images/product_apple_iphone_14_pro_max_04@2x.png"
-              alt="Apple iPhone 14 Pro Max"
-            />
-          </li>
-          <li class="product__img-item">
-            <img
-              class="product__img"
-              src="/images/product_apple_iphone_14_pro_max_05@2x.png"
-              alt="Apple iPhone 14 Pro Max"
-            />
-          </li>
-        </ul>
       </div>
       <div class="product__info">
-        <h1 class="product__title">Apple iPhone 14 Pro Max</h1>
-        <p class="product__price">$1399<span class="product__price--old">$1499</span></p>
-
+        <h1 class="product__title">{{ product?.name || '...' }}</h1>
+        <p class="product__price">
+          ${{ product?.price || '...' }}
+          <span class="product__price--old" v-if="product?.discount_price">${{ product.discount_price }}</span>
+        </p>
         <ul class="product__features-list">
-          <Feature />
-        </ul>
+          <Feature
+            v-for="(char, idx) in product?.characteristics || []"
+            :key="char.characteristic + idx"
+            :name="char.characteristic"
+            :value="char.value"
 
+
+
+          />
+        </ul>
         <p class="product__description">
-          Enhanced capabilities thanks toan enlarged display of 6.7 inchesand work without
-          rechargingthroughout the day. Incredible photosas in weak, yesand in bright lightusing the
-          new systemwith two cameras
+          Enhanced capabilities thanks toan enlarged display of 6.7 inchesand work without rechargingthroughout the day. Incredible photosas in weak, yesand in bright lightusing the new systemwith two cameras more...
           <a class="product__description-more-link" href="#">more...</a>
         </p>
-
         <div class="product__btn-wrapper">
-          <button class="product__btn btn btn--light" type="button">Add to Wishlist</button>
-          <button class="product__btn btn" type="button">Add to Card</button>
+          <button
+            class="product__btn btn btn--light"
+            :class="{ 'product__btn--favorite': product.isFavorite }"
+            type="button"
+            @click="addToFavorite(product)"
+          >
+            {{ product.isFavorite ? 'Remove from Favorites' : 'Add to Favorites' }}
+          </button>
+          <button
+            class="product__btn btn"
+            :class="{ 'product__btn--incart': product.isAddedToCart }"
+            type="button"
+            @click="onClickProductBtn(product)"
+          >
+            {{ product.isAddedToCart ? 'Remove from cart' : 'Add to cart' }}
+          </button>
         </div>
-
         <ul class="product__services-list">
           <Service />
         </ul>
       </div>
     </section>
-
     <Details />
-
     <section class="product__reviews">
       <div class="container">
         <h2 class="visually-hidden">Product rating</h2>
         <Reviews />
       </div>
     </section>
-
     <Related />
   </div>
 </template>

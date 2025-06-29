@@ -1,66 +1,37 @@
+<script setup>
+import ProductItem from './ProductItem.vue'
+</script>
+
 <template>
   <section class="product__related related">
     <div class="container">
       <h2 class="related__title">Related Products</h2>
       <ul class="related__list">
-        <li class="related__item product-item">
-          <button class="product-item__favorite-btn" type="button">
-            <span class="visually-hidden">Add to favorite</span></button
-          ><img
-            class="product-item__img"
-            src="/images/discounts_apple_iphone_14_pro_1tb_gold@2x.png"
-            alt="Apple iPhone 14 Pro 512GB Gold (MQ233)"
-          />
-          <h3 class="product-item__title">
-            <a class="product-item__link" href="#">Apple iPhone 14 Pro 512GB Gold (MQ233)</a>
-          </h3>
-          <b class="product-item__price">$1437</b
-          ><a class="product-item__btn btn" href="#">Buy now</a>
-        </li>
-        <li class="related__item product-item">
-          <button class="product-item__favorite-btn" type="button">
-            <span class="visually-hidden">Add to favorite</span></button
-          ><img
-            class="product-item__img"
-            src="/images/discounts_airpods_max_silver@2x.png"
-            alt="AirPods Max Silver"
-          />
-          <h3 class="product-item__title">
-            <a class="product-item__link" href="#">AirPods Max Silver</a>
-          </h3>
-          <b class="product-item__price">$549</b
-          ><a class="product-item__btn btn" href="#">Buy now</a>
-        </li>
-        <li class="related__item product-item">
-          <button class="product-item__favorite-btn" type="button">
-            <span class="visually-hidden">Add to favorite</span></button
-          ><img
-            class="product-item__img"
-            src="/images/discounts_apple_watch_9@2x.png"
-            alt="Apple Watch Series 9 GPS 41mm Starlight Aluminium Case)"
-          />
-          <h3 class="product-item__title">
-            <a class="product-item__link" href="#"
-              >Apple Watch Series 9 GPS 41mm Starlight Aluminium Case</a
-            >
-          </h3>
-          <b class="product-item__price">$399</b
-          ><a class="product-item__btn btn" href="#">Buy now</a>
-        </li>
-        <li class="related__item product-item">
-          <button class="product-item__favorite-btn" type="button">
-            <span class="visually-hidden">Add to favorite</span></button
-          ><img
-            class="product-item__img"
-            src="/images/discounts_apple_iphone_14_pro_1tb_gold@2x.png"
-            alt="Apple iPhone 14 Pro 1TB Gold (MQ2V3)"
-          />
-          <h3 class="product-item__title">
-            <a class="product-item__link" href="#">Apple iPhone 14 Pro 1TB Gold (MQ2V3)</a>
-          </h3>
-          <b class="product-item__price">$1499</b
-          ><a class="product-item__btn btn" href="#">Buy now</a>
-        </li>
+
+        <ProductItem
+          title="Apple iPhone 14 Pro 512GB Gold (MQ233)"
+          :price="1437"
+          image-url="/images/discounts_apple_iphone_14_pro_1tb_gold@2x.png"
+          alt="Apple iPhone 14 Pro 512GB Gold (MQ233)"
+        />
+        <ProductItem
+          title="AirPods Max Silver"
+          :price="549"
+          image-url="/images/discounts_airpods_max_silver@2x.png"
+          alt="AirPods Max Silver"
+        />
+        <ProductItem
+          title="Apple Watch Series 9 GPS 41mm Starlight Aluminium Case"
+          :price="399"
+          image-url="/images/discounts_apple_watch_9@2x.png"
+          alt="Apple Watch Series 9 GPS 41mm Starlight Aluminium Case)"
+        />
+        <ProductItem
+          title="Apple iPhone 14 Pro 1TB Gold (MQ2V3)"
+          :price="1499"
+          image-url="/images/discounts_apple_iphone_14_pro_1tb_gold@2x.png"
+          alt="Apple iPhone 14 Pro 1TB Gold (MQ2V3)"
+        />
       </ul>
     </div>
   </section>

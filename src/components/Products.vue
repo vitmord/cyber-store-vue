@@ -2,15 +2,24 @@
 import ProductItem from './ProductItem.vue'
 import Pagination from './Pagination.vue'
 
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   items: Array,
 })
 
 const onChangeSelect = inject('onChangeSelect')
 const addToFavorite = inject('addToFavorite')
 const onClickProductBtn = inject('onClickProductBtn')
+const filters = inject('filters')
+
+const filteredItems = computed(() => {
+  if (!filters.category || filters.category.length === 0) return props.items
+  if (Array.isArray(filters.category)) {
+    return props.items.filter(item => filters.category.includes(item.category))
+  }
+  return props.items.filter(item => item.category === filters.category)
+})
 </script>
 
 <template>
@@ -19,7 +28,7 @@ const onClickProductBtn = inject('onClickProductBtn')
 
     <header class="products__header">
       <p class="products__count">
-        Selected Products: <span class="products__count-value">{{ items.length }}</span>
+        Selected Products: <span class="products__count-value">{{ filteredItems.length }}</span>
       </p>
       <form class="products__sorting" action="#">
         <div class="select">
@@ -38,7 +47,7 @@ const onClickProductBtn = inject('onClickProductBtn')
 
     <ul class="products__list" v-auto-animate>
       <ProductItem
-        v-for="item in items"
+        v-for="item in filteredItems"
         :key="item.id"
         :id="item.id"
         :brand="item.brand"

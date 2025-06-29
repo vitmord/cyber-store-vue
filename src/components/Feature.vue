@@ -1,21 +1,14 @@
+<script setup>
+const props = defineProps({
+  name: String,
+  value: String
+})
+</script>
+
 <template>
-  <li class="product__features-item feature feature--screen-size">
-    <span class="feature__name">Screen size</span><span class="feature__value">6.7"</span>
-  </li>
-  <li class="product__features-item feature feature--cpu">
-    <span class="feature__name">CPU</span><span class="feature__value">Apple A16 Bionic</span>
-  </li>
-  <li class="product__features-item feature feature--number-of-cores">
-    <span class="feature__name">Number of Cores</span><span class="feature__value">6</span>
-  </li>
-  <li class="product__features-item feature feature--main-camera">
-    <span class="feature__name">Main camera</span><span class="feature__value">48-12-12 MP</span>
-  </li>
-  <li class="product__features-item feature feature--front-camera">
-    <span class="feature__name">Front-camera</span><span class="feature__value">12 MP</span>
-  </li>
-  <li class="product__features-item feature feature--battery-capacity">
-    <span class="feature__name">Battery capacity</span><span class="feature__value">4323 mAh</span>
+  <li class="product__features-item feature">
+    <span class="feature__name">{{ props.name || '—' }}</span>
+    <span class="feature__value">{{ props.value || '—' }}</span>
   </li>
 </template>
 
@@ -24,12 +17,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px 16px 16px 48px;
+  padding: 10px 10px 10px 48px;
   border-radius: 7px;
   background-color: #f4f4f4;
   background-repeat: no-repeat;
   background-size: 24px 24px;
   background-position: left 16px center;
+  background-image: url('/icons/screen.svg');
 
   &--screen-size {
     background-image: url('/icons/screen.svg');
@@ -57,6 +51,7 @@
 }
 
 .feature__name {
+  margin-bottom: 8px;
   display: block;
   color: #a7a7a7;
   font-family: Abel;
