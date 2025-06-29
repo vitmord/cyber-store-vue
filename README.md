@@ -1,35 +1,32 @@
-# cyber_store_vue
+# Проектный семинар с фреймворками JavaScript
 
-This template should help get you started developing with Vue 3 in Vite.
+Используемы технологии:
 
-## Recommended IDE Setup
+- Vue
+- Vue Router
+- Axios
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+✅ Наличие роутинга в проекте
 
-## Customize configuration
+✅ Наличие хранилища данных ([сервис Mokky.dev](https://mokky.dev/))
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- [Хранилище для избранных товаров](https://a2ca8732969b72d4.mokky.dev/favorites)
 
-## Project Setup
+Наличие всей логики, предусмотренной в макете задания:
 
-```sh
-npm install
-```
+✅ поиск товаров (со страницы Каталога)
 
-### Compile and Hot-Reload for Development
+✅ корзина товаров (`/cart`)
 
-```sh
-npm run dev
-```
+✅ фаворитные товары (`/favorites`)
 
-### Compile and Minify for Production
+✅ фильтрация (со страницы Каталога)
 
-```sh
-npm run build
-```
+✅ сортировка товаров (со страницы Каталога)
 
-### Lint with [ESLint](https://eslint.org/)
 
-```sh
-npm run lint
-```
+✅ Соблюдение правил по формированию архитектуры приложения (компоненты находятся в отдельной папке, наличие UI компонентов, хранилища (сервис) и роутинг тоже должны находиться в отдельном файле)
+
+✅ Использование в работе бекенд-сервера для получение данных
+
+- [Получение данных с Mokky.dev](https://a2ca8732969b72d4.mokky.dev/products)
