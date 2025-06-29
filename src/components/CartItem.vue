@@ -1,4 +1,6 @@
 <script setup>
+import { ref, watch } from 'vue'
+
 const props = defineProps({
   id: Number,
   imageUrl: String,
@@ -7,6 +9,25 @@ const props = defineProps({
   price: Number,
   alt: String,
   onClickRemoveFromCart: Function,
+  qty: {
+    type: Number,
+    default: 1
+  },
+  onQtyChange: Function
+})
+
+const quantity = ref(props.qty)
+
+const increment = () => {
+  quantity.value++
+}
+
+const decrement = () => {
+  if (quantity.value > 1) quantity.value--
+}
+
+watch(quantity, (val) => {
+  if (props.onQtyChange) props.onQtyChange(props.id, val)
 })
 </script>
 
@@ -16,16 +37,16 @@ const props = defineProps({
     <h3 class="cart-item__title">{{ title }}</h3>
     <p class="cart-item__brand">{{ brand }}</p>
     <form class="cart-item__form" action="#">
-      <button class="cart-item__btn cart-item__btn--minus" type="button">
+      <button class="cart-item__btn cart-item__btn--minus" type="button" @click="decrement">
         <span class="visually-hidden">Minus</span>
       </button>
-      <input class="cart-item__input" type="text" value="1" />
-      <button class="cart-item__btn cart-item__btn--plus" type="button">
+      <input class="cart-item__input" type="text" v-model="quantity" />
+      <button class="cart-item__btn cart-item__btn--plus" type="button" @click="increment">
         <span class="visually-hidden">Plus</span>
       </button>
       <button class="visually-hidden" type="submit">Change qty</button>
     </form>
-    <b class="cart-item__price">${{ price }}</b>
+    <b class="cart-item__price">${{ price * quantity }}</b>
     <button class="cart-item__remove-btn" @click="onClickRemoveFromCart" type="button">
       <span class="visually-hidden">Remove product from cart</span>
     </button>

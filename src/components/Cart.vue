@@ -5,6 +5,12 @@ import CartItem from './CartItem.vue'
 const cart = inject('cart')
 console.log(111, cart.value)
 const removeFromCart = inject('removeFromCart')
+
+// Функция для обновления количества товара
+const onQtyChange = (id, qty) => {
+  const item = cart.value.find(i => i.id === id)
+  if (item) item.qty = qty
+}
 </script>
 
 <template>
@@ -21,6 +27,8 @@ const removeFromCart = inject('removeFromCart')
         :price="item.price"
         :image-url="item.images?.[0]"
         :alt="item.name"
+        :qty="item.qty || 1"
+        :onQtyChange="onQtyChange"
         :onClickRemoveFromCart="() => removeFromCart(item)"
       />
     </ul>

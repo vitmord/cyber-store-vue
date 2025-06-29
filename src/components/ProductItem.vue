@@ -27,7 +27,7 @@ const props = defineProps({
       <span class="visually-hidden">Add to favorite</span></button
     ><img class="product-item__img" :src="imageUrl" :alt="alt" />
     <h3 class="product-item__title">
-      <RouterLink :to="`/product/${id}`" class="product-item__link">{{ brand }} {{ title }}</RouterLink>
+      <RouterLink :to="`/product/${id || 1}`" class="product-item__link">{{ brand }} {{ title }}</RouterLink>
     </h3>
     <b class="product-item__price">${{ price }}</b
     ><button @click="onClickAddToCart" class="product-item__btn btn" type="button">{{

@@ -11,7 +11,7 @@ const cart = ref([])
 const favoritesCount = ref(0)
 const cartCount = ref(0)
 const subTotalPrice = computed(() => {
-  return cart.value.reduce((acc, item) => acc + item.price, 0)
+  return cart.value.reduce((acc, item) => acc + item.price * (item.qty || 1), 0)
 })
 const filters = reactive({
   sortBy: 'count-review',

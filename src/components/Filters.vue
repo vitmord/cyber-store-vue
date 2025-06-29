@@ -46,7 +46,7 @@ onMounted(() => {
 
       <fieldset class="filters__group">
         <div class="filters__group-header">
-          <legend class="filters__subtitle">Категория</legend>
+          <legend class="filters__subtitle">Category</legend>
           <button class="filters__group-btn filters__group-btn--expanded" type="button">
             <span class="visually-hidden">Expand / Collapse</span>
           </button>
